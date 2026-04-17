@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NTS Projectworks | Elevated Site Maintenance</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#0a0a0a',
+                            charcoal: '#171717',
+                            gold: '#cda434', // Elegant muted gold
+                            pearl: '#fafafa',
+                            gray: '#737373'
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'slow-pan': 'panImage 30s linear infinite alternate',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        panImage: {
+                            '0%': { objectPosition: '0% 50%' },
+                            '100%': { objectPosition: '100% 50%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+        
+        /* Custom Scrollbar for elegance */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fafafa;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4d4d8;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cda434;
+        }
+
+        /* Minimalist Input Fields */
+        .input-elegant {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #d4d4d8;
+            border-radius: 0;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+        }
+        .input-elegant:focus {
+            outline: none;
+            border-bottom-color: #cda434;
+            box-shadow: none;
+        }
+
+        /* Image Overlay */
+        .img-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.3) 100%);
+        }
+
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px #cda434;
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-charcoal antialiased selection:bg-brand-gold selection:text-white">
+
+    <!-- Refined Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 border-b border-white/10 bg-transparent">
+        <div class="max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-16">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 z-50 group">
+                    <div class="w-8 h-8 border border-brand-gold flex items-center justify-center transform group-hover:rotate-45 transition-transform duration-500">
+                        <div class="w-3 h-3 bg-brand-gold transform group-hover:-rotate-45 transition-transform duration-500"></div>
+                    </div>
+                    <span class="font-serif text-2xl tracking-widest text-white nav-text transition-colors duration-300">NTS<span class="text-brand-gold">.</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-12">
+                    <a href="#philosophy" class="text-sm tracking-widest uppercase text-white/80 hover:text-brand-gold nav-link transition-colors duration-300">Philosophy</a>
+                    <a href="#expertise" class="text-sm tracking-widest uppercase text-white/80 hover:text-brand-gold nav-link transition-colors duration-300">Expertise</a>
+                    <a href="#contact" class="relative text-sm tracking-widest uppercase text-white hover:text-brand-gold nav-link transition-colors duration-300 group">
+                        Inquire
+                        <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center z-50">
+                    <button id="mobile-menu-btn" class="text-white hover:text-brand-gold focus:outline-none nav-text transition-colors">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fullscreen Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-black z-40 hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+            <div class="flex flex-col items-center space-y-8 text-center">
+                <a href="#philosophy" class="font-serif text-3xl text-white hover:text-brand-gold mobile-link transition-colors">Philosophy</a>
+                <a href="#expertise" class="font-serif text-3xl text-white hover:text-brand-gold mobile-link transition-colors">Expertise</a>
+                <a href="#contact" class="font-serif text-3xl text-brand-gold mobile-link transition-colors">Inquire</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Elegant Split Hero Section -->
+    <section class="relative h-screen min-h-[700px] flex items-center bg-brand-black overflow-hidden">
+        <!-- Background Image with Pan Effect -->
+        <div class="absolute inset-0 z-0 img-overlay w-full lg:w-2/3 lg:left-1/3">
+            <img src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?ixlib=rb-4.0.3&auto=format&fit=crop&w=2831&q=80" 
+                 alt="Moody architectural lines" 
+                 class="w-full h-full object-cover animate-slow-pan opacity-60">
+        </div>
+
+        <div class="max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-16 relative z-10 w-full">
+            <div class="w-full lg:w-3/5 xl:w-1/2 pt-20">
+                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-serif leading-[1.1] mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Precision.<br>
+                    <span class="italic font-light text-white/80">Integrity.</span><br>
+                    Flow.
+                </h1>
+                
+                <p class="text-white/60 text-lg font-light leading-relaxed max-w-md mb-12 opacity-0 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    Elevating the standard of construction site maintenance and intelligent water systems management for world-class developments.
+                </p>
+                
+                <div class="opacity-0 animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <a href="#expertise" class="inline-flex items-center gap-4 text-white hover:text-brand-gold transition-colors group">
+                        <span class="text-sm tracking-widest uppercase">Explore Expertise</span>
+                        <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-brand-gold transition-colors">
+                            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vertical Scroll Indicator -->
+        <div class="absolute bottom-12 left-6 sm:left-12 lg:left-16 z-20 flex flex-col items-center gap-4">
+            <span class="text-white/40 text-[10px] tracking-[0.3em] uppercase rotate-180" style="writing-mode: vertical-rl;">Scroll</span>
+            <div class="w-[1px] h-12 bg-white/20 relative">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-brand-gold animate-[bounce_2s_infinite]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Philosophy (About) Section -->
+    <section id="philosophy" class="py-32 bg-brand-pearl relative">
+        <div class="max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
+                
+                <!-- Text Content -->
+                <div class="lg:col-span-5 lg:col-start-2">
+                    <h2 class="text-4xl md:text-5xl font-serif text-brand-black mb-8 leading-tight">
+                        The foundation of <br><span class="italic text-brand-gray">excellence.</span>
+                    </h2>
+                    <p class="text-brand-gray font-light text-lg leading-relaxed mb-6">
+                        At NTS Projectworks, we recognize that true luxury in construction is found in seamless operation and uncompromising safety. We are the invisible force that maintains order, ensures compliance, and protects your infrastructure.
+                    </p>
+                    <p class="text-brand-gray font-light text-lg leading-relaxed mb-10">
+                        Our dual mastery of structural site maintenance and complex hydraulic systems allows us to foresee challenges and engineer elegant, lasting solutions.
+                    </p>
+                    
+                    <a href="#contact" class="inline-flex items-center gap-3 text-brand-black font-medium group hover:text-brand-gold transition-colors">
+                        <span class="uppercase tracking-widest text-xs">Request a Consultation</span>
+                        <span class="w-8 h-[1px] bg-brand-black group-hover:bg-brand-gold group-hover:w-12 transition-all"></span>
+                    </a>
+                </div>
+
+                <!-- Abstract Imagery -->
+                <div class="lg:col-span-5 lg:col-start-8 relative">
+                    <div class="aspect-[4/5] bg-brand-charcoal relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                             alt="Minimalist architectural structure" 
+                             class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105">
+                        
+                        <!-- Geometric decorative element -->
+                        <div class="absolute -bottom-8 -left-8 w-32 h-32 border border-brand-gold z-10 hidden md:block"></div>
+                    </div>
+                    
+                    <!-- Floating stats card -->
+                    <div class="absolute -left-12 top-1/4 bg-white p-8 shadow-2xl z-20 hidden md:block">
+                        <p class="font-serif text-5xl text-brand-black mb-2">15<span class="text-brand-gold text-3xl">+</span></p>
+                        <p class="text-xs uppercase tracking-widest text-brand-gray font-semibold">Years of Mastery</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Areas of Expertise (Services) -->
+    <section id="expertise" class="py-32 bg-brand-black text-white relative">
+        <div class="max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-16">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="w-12 h-[1px] bg-brand-gold"></span>
+                        <span class="text-brand-gold text-xs font-semibold tracking-[0.2em] uppercase">Our Disciplines</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif leading-tight">
+                        Curated <br><span class="italic text-white/50">Services.</span>
+                    </h2>
+                </div>
+                <p class="text-white/50 font-light max-w-sm text-sm">
+                    Specialized divisions dedicated to preserving the integrity of your site and the purity of your water systems.
+                </p>
+            </div>
+
+            <!-- Sleek Service Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8">
+                
+                <!-- Discipline 01 -->
+                <div class="group cursor-pointer">
+                    <div class="border-t border-white/10 pt-6 group-hover:border-brand-gold transition-colors duration-500">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3 class="text-2xl font-serif group-hover:text-brand-gold transition-colors">Site<br>Preparation</h3>
+                            <span class="font-light text-white/30 text-sm">01</span>
+                        </div>
+                        <p class="text-white/50 font-light text-sm leading-relaxed mb-6 line-clamp-3">
+                            Meticulous clearing, leveling, and management of construction environments to establish a pristine canvas for development.
+                        </p>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Discipline 02 -->
+                <div class="group cursor-pointer">
+                    <div class="border-t border-white/10 pt-6 group-hover:border-brand-gold transition-colors duration-500">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3 class="text-2xl font-serif group-hover:text-brand-gold transition-colors">Structural<br>Monitoring</h3>
+                            <span class="font-light text-white/30 text-sm">02</span>
+                        </div>
+                        <p class="text-white/50 font-light text-sm leading-relaxed mb-6 line-clamp-3">
+                            Continuous oversight of structural integrity, safety barriers, and compliance measures to mitigate risk and ensure absolute safety.
+                        </p>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Discipline 03 -->
+                <div class="group cursor-pointer">
+                    <div class="border-t border-white/10 pt-6 group-hover:border-brand-gold transition-colors duration-500">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3 class="text-2xl font-serif group-hover:text-brand-gold transition-colors">Hydraulic<br>Diagnostics</h3>
+                            <span class="font-light text-white/30 text-sm">03</span>
+                        </div>
+                        <p class="text-white/50 font-light text-sm leading-relaxed mb-6 line-clamp-3">
+                            Advanced acoustic and thermal analysis to pinpoint vulnerabilities in water networks with surgical precision before they escalate.
+                        </p>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Discipline 04 -->
+                <div class="group cursor-pointer">
+                    <div class="border-t border-white/10 pt-6 group-hover:border-brand-gold transition-colors duration-500">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3 class="text-2xl font-serif group-hover:text-brand-gold transition-colors">Network<br>Restoration</h3>
+                            <span class="font-light text-white/30 text-sm">04</span>
+                        </div>
+                        <p class="text-white/50 font-light text-sm leading-relaxed mb-6 line-clamp-3">
+                            Seamless repair and reinforcement of commercial pipelines, executed with minimal disruption to ongoing operations.
+                        </p>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Discipline 05 -->
+                <div class="group cursor-pointer">
+                    <div class="border-t border-white/10 pt-6 group-hover:border-brand-gold transition-colors duration-500">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3 class="text-2xl font-serif group-hover:text-brand-gold transition-colors">Stormwater<br>Management</h3>
+                            <span class="font-light text-white/30 text-sm">05</span>
+                        </div>
+                        <p class="text-white/50 font-light text-sm leading-relaxed mb-6 line-clamp-3">
+                            Engineering intelligent drainage solutions to master site runoff, protecting soil foundations and architectural assets.
+                        </p>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Discipline 06 -->
+                <div class="group cursor-pointer">
+                    <div class="border-t border-white/10 pt-6 group-hover:border-brand-gold transition-colors duration-500">
+                        <div class="flex justify-between items-start mb-12">
+                            <h3 class="text-2xl font-serif group-hover:text-brand-gold transition-colors">Emergency<br>Response</h3>
+                            <span class="font-light text-white/30 text-sm">06</span>
+                        </div>
+                        <p class="text-white/50 font-light text-sm leading-relaxed mb-6 line-clamp-3">
+                            A rapid-deployment task force available 24/7 to resolve critical infrastructure failures and restore equilibrium instantly.
+                        </p>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Image Break -->
+    <section class="h-[50vh] min-h-[400px] w-full relative bg-fixed bg-center bg-cover flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+        <div class="absolute inset-0 bg-brand-black/60 backdrop-blur-[2px]"></div>
+        <div class="relative z-10 text-center px-6">
+            <h2 class="text-6xl md:text-8xl font-serif text-outline opacity-50 mb-4">Uncompromising</h2>
+            <h2 class="text-3xl md:text-5xl font-serif text-white">Commitment to Quality.</h2>
+        </div>
+    </section>
+
+    <!-- Minimalist Contact Section -->
+    <section id="contact" class="py-32 bg-white relative">
+        <div class="max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                
+                <!-- Contact Details -->
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-serif text-brand-black mb-12">Begin a<br>Conversation.</h2>
+                    
+                    <div class="space-y-10">
+                        <div>
+                            <h4 class="text-xs uppercase tracking-[0.2em] text-brand-gray mb-2 font-semibold">Headquarters</h4>
+                            <p class="font-light text-brand-charcoal text-lg">
+                                124 Design District Blvd,<br>
+                                Suite 400<br>
+                                Metropolitan Area, 10024
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xs uppercase tracking-[0.2em] text-brand-gray mb-2 font-semibold">Direct Lines</h4>
+                            <p class="font-light text-brand-charcoal text-lg">
+                                Office: +1 (555) 123-4567<br>
+                                Emergency: 1-800-NTS-PROJ
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xs uppercase tracking-[0.2em] text-brand-gray mb-2 font-semibold">Digital</h4>
+                            <a href="mailto:inquiries@ntsprojectworks.com" class="font-light text-brand-charcoal text-lg hover:text-brand-gold transition-colors border-b border-transparent hover:border-brand-gold pb-1 inline-block">
+                                inquiries@ntsprojectworks.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elegant Form -->
+                <div>
+                    <form id="contactForm" class="space-y-10 mt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div class="relative group">
+                                <input type="text" id="firstName" required class="input-elegant w-full text-brand-black placeholder-transparent peer" placeholder="First Name">
+                                <label for="firstName" class="absolute left-0 top-3 text-brand-gray text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-brand-gold peer-valid:-top-4 peer-valid:text-xs pointer-events-none">First Name</label>
+                            </div>
+                            <div class="relative group">
+                                <input type="text" id="lastName" required class="input-elegant w-full text-brand-black placeholder-transparent peer" placeholder="Last Name">
+                                <label for="lastName" class="absolute left-0 top-3 text-brand-gray text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-brand-gold peer-valid:-top-4 peer-valid:text-xs pointer-events-none">Last Name</label>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <input type="email" id="email" required class="input-elegant w-full text-brand-black placeholder-transparent peer" placeholder="Email Address">
+                            <label for="email" class="absolute left-0 top-3 text-brand-gray text-sm transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-brand-gold peer-valid:-top-4 peer-valid:text-xs pointer-events-none">Email Address</label>
+                        </div>
+
+                        <div class="relative group">
+                            <select id="service" required class="input-elegant w-full text-brand-black appearance-none cursor-pointer bg-transparent relative z-10" style="color: transparent;" onchange="this.style.color = '#171717';">
+                                <option value="" disabled selected></option>
+                                <option value="general">General Inquiry</option>
+                                <option value="construction">Construction Site Preparation</option>
+                                <option value="water">Hydraulic / Water Management</option>
+                            </select>
+                            <label class="absolute left-0 top-3 text-brand-gray text-sm pointer-events-none z-0">Subject of Inquiry</label>
+                            <i data-lucide="chevron-down" class="absolute right-0 top-4 w-4 h-4 text-brand-gray pointer-events-none z-0"></i>
+                        </div>
+
+                        <div class="relative group pt-4">
+                            <textarea id="message" rows="1" required class="input-elegant w-full text-brand-black placeholder-transparent peer resize-none min-h-[40px] overflow-hidden" placeholder="Project Details" oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"></textarea>
+                            <label for="message" class="absolute left-0 top-7 text-brand-gray text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-brand-gold peer-valid:-top-2 peer-valid:text-xs pointer-events-none">Project Details</label>
+                        </div>
+
+                        <button type="submit" class="w-full sm:w-auto px-12 py-4 bg-brand-charcoal text-white text-xs uppercase tracking-widest hover:bg-brand-gold transition-colors duration-300">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black pt-20 pb-10 border-t border-white/5">
+        <div class="max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                
+                <div class="md:col-span-2">
+                    <a href="#" class="inline-flex items-center gap-3 mb-6 group">
+                        <div class="w-6 h-6 border border-brand-gold flex items-center justify-center transform group-hover:rotate-45 transition-transform duration-500">
+                            <div class="w-2 h-2 bg-brand-gold transform group-hover:-rotate-45 transition-transform duration-500"></div>
+                        </div>
+                        <span class="font-serif text-xl tracking-widest text-white">NTS<span class="text-brand-gold">.</span></span>
+                    </a>
+                    <p class="text-white/40 font-light text-sm max-w-sm">
+                        Defining the intersection of robust structural support and fluid engineering excellence.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="text-white text-xs font-semibold tracking-widest uppercase mb-6">Navigation</h5>
+                    <ul class="space-y-4 text-white/40 font-light text-sm">
+                        <li><a href="#philosophy" class="hover:text-brand-gold transition-colors">Philosophy</a></li>
+                        <li><a href="#expertise" class="hover:text-brand-gold transition-colors">Expertise</a></li>
+                        <li><a href="#contact" class="hover:text-brand-gold transition-colors">Inquire</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-white text-xs font-semibold tracking-widest uppercase mb-6">Connect</h5>
+                    <ul class="space-y-4 text-white/40 font-light text-sm">
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Instagram</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Twitter (X)</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-white/30 text-xs font-light">
+                <p>&copy; <span id="year"></span> NTS Projectworks. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minimal Toast -->
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-brand-charcoal text-white px-8 py-4 rounded-none shadow-2xl flex items-center gap-4 transition-all duration-500 opacity-0 pointer-events-none translate-y-4 z-50 border border-brand-gold/30">
+        <i data-lucide="check" class="text-brand-gold w-5 h-5"></i>
+        <p class="font-light text-sm tracking-wide">Inquiry received. We will be in touch shortly.</p>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Footer Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Elegant Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        const navTexts = document.querySelectorAll('.nav-text, .nav-link');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-sm', 'border-transparent');
+                navbar.classList.remove('bg-transparent', 'py-6', 'border-white/10');
+                navbar.classList.add('py-4');
+                navTexts.forEach(el => {
+                    el.classList.remove('text-white', 'text-white/80');
+                    el.classList.add('text-brand-black');
+                });
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-sm', 'border-transparent', 'py-4');
+                navbar.classList.add('bg-transparent', 'py-6', 'border-white/10');
+                navTexts.forEach(el => {
+                    el.classList.remove('text-brand-black');
+                    if(el.classList.contains('nav-link') && el.textContent.trim() !== 'Inquire') {
+                         el.classList.add('text-white/80');
+                    } else {
+                         el.classList.add('text-white');
+                    }
+                });
+            }
+        });
+
+        // Mobile Menu Logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        mobileBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                // slight delay to allow display block to apply before opacity transition
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0');
+                    mobileMenu.classList.add('opacity-100');
+                }, 10);
+                
+                mobileBtn.innerHTML = '<i data-lucide="x" class="w-6 h-6 text-white"></i>';
+                lucide.createIcons();
+            } else {
+                mobileMenu.classList.remove('opacity-100');
+                mobileMenu.classList.add('opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+                
+                // Revert icon color based on scroll position
+                const iconColorClass = window.scrollY > 50 ? 'text-brand-black' : 'text-white';
+                mobileBtn.innerHTML = `<i data-lucide="menu" class="w-6 h-6 ${iconColorClass}"></i>`;
+                lucide.createIcons();
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileBtn.click();
+            });
+        });
+
+        // Form Submit & Minimal Toast
+        const form = document.getElementById('contactForm');
+        const toast = document.getElementById('toast');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Show Toast
+                toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                
+                form.reset();
+                // reset textarea height
+                document.getElementById('message').style.height = '';
+                // reset select color
+                document.getElementById('service').style.color = 'transparent';
+
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+
+                // Hide Toast
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }, 4000);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
